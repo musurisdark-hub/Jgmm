@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criação de Sites Profissionais</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#111;
+    color:white;
+}
+
+.topo{
+    text-align:center;
+    padding:20px;
+    background:linear-gradient(135deg,#006400,#111);
+}
+
+.topo img{
+    width:180px;
+    height:180px;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid #ffd700;
+}
+
+h1{
+    color:#ffd700;
+}
+
+.container{
+    padding:20px;
+}
+
+.card{
+    background:#222;
+    padding:20px;
+    margin:15px 0;
+    border-radius:15px;
+    box-shadow:0 0 10px #000;
+}
+
+.botao{
+    display:block;
+    background:#25D366;
+    color:white;
+    text-align:center;
+    padding:15px;
+    border-radius:30px;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:bold;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #555;
+}
+
+.titulo{
+    color:#ffd700;
+}
+
+.pix{
+    background:#006400;
+}
+
+.copiar{
+    background:#ffd700;
+    color:#000;
+    border:none;
+    padding:12px;
+    width:100%;
+    border-radius:20px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:#000;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="topo">
+
+<img src="foto-topo.jpg">
+
+<h1>Criação de Sites Profissionais</h1>
+
+<p>
+Tenha um site com domínio próprio para o seu negócio!
+</p>
+
+<a class="botao" href="https://wa.me/5521969742534">
+💬 Falar no WhatsApp
+</a>
+
+</div>
+
+
+<div class="container">
+
+
+<div class="card">
+
+<h2 class="titulo">✨ Desenvolvimento de Sites</h2>
+
+<p>
+Desenvolvo sites modernos, rápidos e personalizados para destacar sua empresa na internet.
+</p>
+
+<ul>
+<li>📸 3 fotos incluídas</li>
+<li>📝 Descrição personalizada do negócio</li>
+<li>📊 Tabela de preços</li>
+<li>💬 Botão WhatsApp</li>
+<li>📧 E-mail para contato</li>
+<li>📞 Número de telefone</li>
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="titulo">💰 Valores</h2>
+
+<table>
+<tr>
+<td>Entrada (sinal)</td>
+<td>R$ 190,00</td>
+</tr>
+
+<tr>
+<td>Pagamento final</td>
+<td>R$ 200,00</td>
+</tr>
+</table>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="titulo">➕ Serviços adicionais</h2>
+
+<ul>
+<li>📸 Foto extra: R$ 20,00</li>
+<li>✏️ Alteração de texto: R$ 20,00</li>
+<li>📄 Página extra: R$ 250,00</li>
+</ul>
+
+</div>
+
+
+<div class="card pix">
+
+<h2>💚 Pagamento PIX</h2>
+
+<table>
+
+<tr>
+<td>Tipo de chave</td>
+<td>Telefone</td>
+</tr>
+
+<tr>
+<td>Banco</td>
+<td>Inter Empresa</td>
+</tr>
+
+<tr>
+<td>Nome</td>
+<td>Gabriel Musuris</td>
+</tr>
+
+<tr>
+<td>Chave PIX</td>
+<td id="pix">21999303395</td>
+</tr>
+
+</table>
+
+<br>
+
+<button class="copiar" onclick="copiarPix()">
+📋 Copiar chave PIX
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2 class="titulo">📞 Contato</h2>
+
+<p>WhatsApp: 21 96974-2534</p>
+
+<p>E-mail: GabrielMusuris@outlook.com</p>
+
+</div>
+
+
+</div>
+
+
+<footer>
+⭐ Seu negócio merece um site profissional!
+</footer>
+
+
+<script>
+
+function copiarPix(){
+
+let chave="21999303395";
+
+navigator.clipboard.writeText(chave);
+
+alert("Chave PIX copiada!");
+
+}
+
+</script>
+
+
+</body>
+</html>
