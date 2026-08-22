@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Membros - Musuris</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #111827, #374151);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 430px;
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin: 0 0 8px;
+      color: #111827;
+    }
+
+    .descricao {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 6px;
+      font-weight: bold;
+      color: #374151;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #111827;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #111827;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #374151;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    #mensagem {
+      text-align: center;
+      margin-top: 18px;
+      font-weight: bold;
+    }
+
+    .sucesso {
+      color: #15803d;
+    }
+
+    .erro {
+      color: #dc2626;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <h1>Cadastro de Membros</h1>
+
+    <p class="descricao">
+      Preencha seus dados para realizar o cadastro.
+    </p>
+
+    <form id="cadastroForm">
+
+      <label for="nome">Nome</label>
+      <input
+        type="text"
+        id="nome"
+        placeholder="Digite seu nome"
+        required
+      >
+
+      <label for="email">E-mail</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Digite seu e-mail"
+      >
+
+      <label for="telefone">Telefone</label>
+      <input
+        type="tel"
+        id="telefone"
+        placeholder="Digite seu telefone"
+      >
+
+      <button type="submit" id="botao">
+        Cadastrar
+      </button>
+
+    </form>
+
+    <div id="mensagem"></div>
+
+  </div>
+
+<script>
+
+  /* ==============================
+     CONFIGURAÇÃO DO SUPABASE
+     ============================== */
+
+  const SUPABASE_URL =
+    "https://ynmzjnmlyfowxgpayhyr.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_vo8QrMPS7SNHXjpD_oK0Ug_dZBzwSo8";
+
+
+  /* ==============================
+     FORMULÁRIO
+     ============================== */
+
+  const formulario =
+    document.getElementById("cadastroForm");
+
+  const botao =
+    document.getElementById("botao");
+
+  const mensagem =
+    document.getElementById("mensagem");
+
+
+  formulario.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const nome =
+      document.getElementById("nome").value.trim();
+
+    const email =
+      document.getElementById("email").value.trim();
+
+    const telefone =
+      document.getElementById("telefone").value.trim();
+
+
+    if (!nome) {
+      mensagem.textContent = "Digite seu nome.";
+      mensagem.className = "erro";
+      return;
+    }
+
+
+    botao.disabled = true;
+    botao.textContent = "Cadastrando...";
+
+    mensagem.textContent = "";
+    mensagem.className = "";
+
+
+    try {
+
+      const resposta = await fetch(
+        SUPABASE_URL + "/rest/v1/membros",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY,
+            "Prefer": "return=minimal"
+          },
+
+          body: JSON.stringify({
+            nome: nome,
+            email: email || null,
+            telefone: telefone || null
+          })
+        }
+      );
+
+
+      if (!resposta.ok) {
+
+        const erro =
+          await resposta.text();
+
+        console.error("Erro Supabase:", erro);
+
+        throw new Error(erro);
+      }
+
+
+      mensagem.textContent =
+        "Cadastro realizado com sucesso!";
+
+      mensagem.className = "sucesso";
+
+
+      formulario.reset();
+
+
+    } catch (erro) {
+
+      console.error(erro);
+
+      mensagem.textContent =
+        "Erro ao realizar o cadastro. Tente novamente.";
+
+      mensagem.className = "erro";
+
+    }
+
+
+    botao.disabled = false;
+    botao.textContent = "Cadastrar";
+
+  });
+
+</script>
+
+</body>
+</html>
