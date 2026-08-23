@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Membros - Musuris</title>
+
+  <title>Cadastro de Membros | Musuris</title>
 
   <style>
     * {
@@ -13,26 +15,31 @@
     body {
       margin: 0;
       min-height: 100vh;
+      padding: 20px;
       font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #111827, #374151);
+
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
     }
 
     .card {
       width: 100%;
-      max-width: 430px;
+      max-width: 450px;
+
       background: white;
-      border-radius: 20px;
       padding: 30px;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+
+      border-radius: 20px;
+
+      box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.25);
     }
 
     h1 {
       text-align: center;
-      margin: 0 0 8px;
+      margin-top: 0;
       color: #111827;
     }
 
@@ -44,16 +51,21 @@
 
     label {
       display: block;
-      margin: 15px 0 6px;
+      margin-top: 15px;
+      margin-bottom: 6px;
+
       font-weight: bold;
       color: #374151;
     }
 
     input {
       width: 100%;
-      padding: 14px;
+
+      padding: 13px;
+
       border: 1px solid #d1d5db;
       border-radius: 10px;
+
       font-size: 16px;
     }
 
@@ -64,14 +76,19 @@
 
     button {
       width: 100%;
+
       margin-top: 25px;
       padding: 15px;
+
       border: none;
       border-radius: 10px;
+
       background: #111827;
       color: white;
+
       font-size: 17px;
       font-weight: bold;
+
       cursor: pointer;
     }
 
@@ -85,8 +102,10 @@
     }
 
     #mensagem {
-      text-align: center;
       margin-top: 18px;
+
+      text-align: center;
+
       font-weight: bold;
     }
 
@@ -97,169 +116,362 @@
     .erro {
       color: #dc2626;
     }
+
+    .voltar {
+      display: block;
+
+      margin-top: 20px;
+
+      text-align: center;
+
+      color: #374151;
+      text-decoration: none;
+    }
+
+    .voltar:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 
+
 <body>
+
 
   <div class="card">
 
-    <h1>Cadastro de Membros</h1>
+    <h1>
+      Cadastro de Membros
+    </h1>
+
 
     <p class="descricao">
       Preencha seus dados para realizar o cadastro.
     </p>
 
+
     <form id="cadastroForm">
 
-      <label for="nome">Nome</label>
+
+      <!-- NOME -->
+
+      <label for="nome">
+        Nome
+      </label>
+
       <input
         type="text"
         id="nome"
+        name="nome"
         placeholder="Digite seu nome"
         required
       >
 
-      <label for="email">E-mail</label>
+
+      <!-- EMAIL -->
+
+      <label for="email">
+        E-mail
+      </label>
+
       <input
         type="email"
         id="email"
+        name="email"
         placeholder="Digite seu e-mail"
+        required
       >
 
-      <label for="telefone">Telefone</label>
+
+      <!-- TELEFONE -->
+
+      <label for="telefone">
+        Telefone
+      </label>
+
       <input
         type="tel"
         id="telefone"
+        name="telefone"
         placeholder="Digite seu telefone"
+        required
       >
 
-      <button type="submit" id="botao">
-        Cadastrar
+
+      <!-- CIDADE -->
+
+      <label for="cidade">
+        Cidade
+      </label>
+
+      <input
+        type="text"
+        id="cidade"
+        name="cidade"
+        placeholder="Digite sua cidade"
+        required
+      >
+
+
+      <!-- DATA DE NASCIMENTO -->
+
+      <label for="data_nascimento">
+        Data de nascimento
+      </label>
+
+      <input
+        type="date"
+        id="data_nascimento"
+        name="data_nascimento"
+        required
+      >
+
+
+      <!-- BOTÃO -->
+
+      <button
+        type="submit"
+        id="botao"
+      >
+        CADASTRAR
       </button>
+
 
     </form>
 
+
     <div id="mensagem"></div>
+
+
+    <a
+      href="index.html"
+      class="voltar"
+    >
+      ← Voltar para o site
+    </a>
 
   </div>
 
+
+
 <script>
 
-  /* ==============================
+
+  /* =====================================
      CONFIGURAÇÃO DO SUPABASE
-     ============================== */
+     ===================================== */
 
   const SUPABASE_URL =
     "https://ynmzjnmlyfowxgpayhyr.supabase.co";
+
 
   const SUPABASE_KEY =
     "sb_publishable_vo8QrMPS7SNHXjpD_oK0Ug_dZBzwSo8";
 
 
-  /* ==============================
+
+  /* =====================================
      FORMULÁRIO
-     ============================== */
+     ===================================== */
 
   const formulario =
     document.getElementById("cadastroForm");
 
+
   const botao =
     document.getElementById("botao");
+
 
   const mensagem =
     document.getElementById("mensagem");
 
 
-  formulario.addEventListener("submit", async function(event) {
 
-    event.preventDefault();
+  formulario.addEventListener(
+    "submit",
+    async function(event) {
 
-    const nome =
-      document.getElementById("nome").value.trim();
-
-    const email =
-      document.getElementById("email").value.trim();
-
-    const telefone =
-      document.getElementById("telefone").value.trim();
+      event.preventDefault();
 
 
-    if (!nome) {
-      mensagem.textContent = "Digite seu nome.";
-      mensagem.className = "erro";
-      return;
-    }
+      /* Pegar os valores */
+
+      const nome =
+        document
+          .getElementById("nome")
+          .value
+          .trim();
 
 
-    botao.disabled = true;
-    botao.textContent = "Cadastrando...";
+      const email =
+        document
+          .getElementById("email")
+          .value
+          .trim();
 
-    mensagem.textContent = "";
-    mensagem.className = "";
+
+      const telefone =
+        document
+          .getElementById("telefone")
+          .value
+          .trim();
 
 
-    try {
+      const cidade =
+        document
+          .getElementById("cidade")
+          .value
+          .trim();
 
-      const resposta = await fetch(
-        SUPABASE_URL + "/rest/v1/membros",
-        {
-          method: "POST",
 
-          headers: {
-            "Content-Type": "application/json",
-            "apikey": SUPABASE_KEY,
-            "Authorization": "Bearer " + SUPABASE_KEY,
-            "Prefer": "return=minimal"
-          },
+      const dataNascimento =
+        document
+          .getElementById("data_nascimento")
+          .value;
 
-          body: JSON.stringify({
-            nome: nome,
-            email: email || null,
-            telefone: telefone || null
-          })
+
+
+      /* Preparar botão */
+
+      botao.disabled = true;
+
+      botao.textContent =
+        "CADASTRANDO...";
+
+
+      mensagem.textContent = "";
+
+      mensagem.className = "";
+
+
+
+      try {
+
+
+        /* =====================================
+           ENVIAR PARA SUPABASE
+           ===================================== */
+
+        const resposta =
+          await fetch(
+            SUPABASE_URL +
+            "/rest/v1/membros",
+            {
+
+              method: "POST",
+
+
+              headers: {
+
+                "Content-Type":
+                  "application/json",
+
+                "apikey":
+                  SUPABASE_KEY,
+
+                "Authorization":
+                  "Bearer " +
+                  SUPABASE_KEY,
+
+                "Prefer":
+                  "return=minimal"
+
+              },
+
+
+              body:
+                JSON.stringify({
+
+                  nome:
+                    nome,
+
+                  email:
+                    email,
+
+                  telefone:
+                    telefone,
+
+                  cidade:
+                    cidade,
+
+                  data_nascimento:
+                    dataNascimento
+
+                })
+
+            }
+          );
+
+
+
+        /* =====================================
+           VERIFICAR RESULTADO
+           ===================================== */
+
+        if (!resposta.ok) {
+
+          const erro =
+            await resposta.text();
+
+
+          console.error(
+            "Erro do Supabase:",
+            erro
+          );
+
+
+          throw new Error(erro);
+
         }
-      );
 
 
-      if (!resposta.ok) {
 
-        const erro =
-          await resposta.text();
+        /* =====================================
+           SUCESSO
+           ===================================== */
 
-        console.error("Erro Supabase:", erro);
+        mensagem.textContent =
+          "✅ Cadastro realizado com sucesso!";
 
-        throw new Error(erro);
+
+        mensagem.className =
+          "sucesso";
+
+
+        formulario.reset();
+
+
+
+      } catch (erro) {
+
+
+        console.error(erro);
+
+
+        mensagem.textContent =
+          "❌ Não foi possível realizar o cadastro.";
+
+
+        mensagem.className =
+          "erro";
+
       }
 
 
-      mensagem.textContent =
-        "Cadastro realizado com sucesso!";
 
-      mensagem.className = "sucesso";
+      /* Restaurar botão */
 
+      botao.disabled = false;
 
-      formulario.reset();
-
-
-    } catch (erro) {
-
-      console.error(erro);
-
-      mensagem.textContent =
-        "Erro ao realizar o cadastro. Tente novamente.";
-
-      mensagem.className = "erro";
+      botao.textContent =
+        "CADASTRAR";
 
     }
 
-
-    botao.disabled = false;
-    botao.textContent = "Cadastrar";
-
-  });
+  );
 
 </script>
+
 
 </body>
 </html>
