@@ -14,10 +14,6 @@
   <link rel="stylesheet" href="styles.css">
 
   <style>
-    /* =========================
-       FOTO PRINCIPAL
-       ========================= */
-
     .hero {
       position: relative;
       width: 100%;
@@ -37,41 +33,26 @@
       object-position: center;
     }
 
-    /* Retira completamente o conteúdo que ficava sobre a foto */
     .hero-overlay,
     .hero-content {
       display: none !important;
     }
 
-
-    /* =========================
-       PIX
-       ========================= */
-
     .pix-card {
       max-width: 600px;
       margin: auto;
+      text-align: center;
     }
 
-    .pix-key {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-top: 10px;
-    }
-
-    .pix-key input {
-      flex: 1;
-      padding: 14px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-      background: #f5f5f5;
-    }
-
-    .pix-key button {
-      white-space: nowrap;
+    .pix-button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
     }
 
     #pixMensagem {
@@ -80,31 +61,20 @@
     }
 
     @media (max-width: 600px) {
-
       .hero {
         min-height: 55vh;
       }
 
-      .pix-key {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .pix-key button {
+      .pix-button {
         width: 100%;
       }
-
     }
   </style>
 </head>
 
-
 <body>
 
-
-  <!-- =========================
-       MENU
-       ========================= -->
+  <!-- MENU -->
 
   <header class="topbar">
 
@@ -118,34 +88,22 @@
 
     <nav aria-label="Navegação principal">
 
-      <a href="#inicio">
-        Início
-      </a>
+      <a href="#inicio">Início</a>
 
-      <a href="#biografia">
-        Biografia
-      </a>
+      <a href="#biografia">Biografia</a>
 
-      <a href="#cadastro">
-        Cadastro
-      </a>
+      <a href="#cadastro">Cadastro</a>
 
-      <a href="#pix">
-        PIX
-      </a>
+      <a href="#pix">PIX</a>
 
     </nav>
 
   </header>
 
 
-
   <main>
 
-
-    <!-- =========================
-         FOTO PRINCIPAL
-         ========================= -->
+    <!-- FOTO PRINCIPAL -->
 
     <section
       id="inicio"
@@ -162,10 +120,7 @@
     </section>
 
 
-
-    <!-- =========================
-         BIOGRAFIA
-         ========================= -->
+    <!-- BIOGRAFIA -->
 
     <section
       id="biografia"
@@ -174,13 +129,9 @@
 
       <div class="section-heading">
 
-        <span>
-          01
-        </span>
+        <span>01</span>
 
-        <h2>
-          Minha biografia
-        </h2>
+        <h2>Minha biografia</h2>
 
       </div>
 
@@ -190,7 +141,6 @@
         <div class="bio-avatar">
           GM
         </div>
-
 
         <div>
 
@@ -211,10 +161,7 @@
     </section>
 
 
-
-    <!-- =========================
-         CADASTRO
-         ========================= -->
+    <!-- CADASTRO -->
 
     <section
       id="cadastro"
@@ -223,13 +170,9 @@
 
       <div class="section-heading">
 
-        <span>
-          02
-        </span>
+        <span>02</span>
 
-        <h2>
-          Cadastro
-        </h2>
+        <h2>Cadastro</h2>
 
       </div>
 
@@ -260,10 +203,7 @@
     </section>
 
 
-
-    <!-- =========================
-         PIX
-         ========================= -->
+    <!-- PIX -->
 
     <section
       id="pix"
@@ -272,13 +212,9 @@
 
       <div class="section-heading">
 
-        <span>
-          03
-        </span>
+        <span>03</span>
 
-        <h2>
-          PIX
-        </h2>
+        <h2>PIX</h2>
 
       </div>
 
@@ -286,57 +222,31 @@
       <div class="form-card pix-card">
 
         <h3>
-          Dados para pagamento via PIX
+          Pagamento via PIX
         </h3>
 
 
         <p>
-          <strong>
-            Banco:
-          </strong>
-          <br>
-
+          <strong>Banco:</strong><br>
           Inter Empresa
         </p>
 
 
         <p>
-          <strong>
-            Nome:
-          </strong>
-          <br>
-
+          <strong>Nome:</strong><br>
           Gabriel Musuris
         </p>
 
 
-        <p>
-          <strong>
-            Chave PIX — Telefone:
-          </strong>
-        </p>
+        <!-- A CHAVE NÃO É MOSTRADA NA TELA -->
 
-
-        <div class="pix-key">
-
-          <input
-            type="text"
-            id="pixKey"
-            value="21999303395"
-            readonly
-            aria-label="Chave PIX"
-          >
-
-
-          <button
-            type="button"
-            class="btn btn-gold"
-            onclick="copiarPix()"
-          >
-            📋 COPIAR CHAVE
-          </button>
-
-        </div>
+        <button
+          type="button"
+          class="btn btn-gold pix-button"
+          onclick="copiarPix()"
+        >
+          📋 COPIAR CHAVE PIX
+        </button>
 
 
         <p
@@ -348,14 +258,10 @@
 
     </section>
 
-
   </main>
 
 
-
-  <!-- =========================
-       RODAPÉ
-       ========================= -->
+  <!-- RODAPÉ -->
 
   <footer>
 
@@ -365,13 +271,9 @@
 
 
     <span>
-
-      ©
-      <span id="year"></span>
-
+      © <span id="year"></span>
       Gabriel Musuris.
       Todos os direitos reservados.
-
     </span>
 
 
@@ -382,81 +284,59 @@
   </footer>
 
 
-
-  <!-- =========================
-       JAVASCRIPT
-       ========================= -->
-
   <script>
 
-    /* Ano automático */
+    /* Ano */
 
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
 
-    /* Copiar PIX */
+    /* Chave PIX fica somente no código */
 
-    function copiarPix() {
+    const chavePix = "21999303395";
 
-      const chave =
-        document.getElementById("pixKey").value;
+
+    /* Copiar chave */
+
+    async function copiarPix() {
 
       const mensagem =
         document.getElementById("pixMensagem");
 
+      try {
 
-      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(chavePix);
 
-        navigator.clipboard
-          .writeText(chave)
-          .then(function () {
+        mensagem.textContent =
+          "✅ Chave PIX copiada!";
 
-            mensagem.textContent =
-              "✅ Chave PIX copiada!";
+      } catch (erro) {
 
-          })
-          .catch(function () {
+        const campo =
+          document.createElement("textarea");
 
-            copiarAlternativo(chave);
+        campo.value = chavePix;
 
-          });
+        campo.style.position = "fixed";
+        campo.style.left = "-9999px";
 
-      } else {
+        document.body.appendChild(campo);
 
-        copiarAlternativo(chave);
+        campo.select();
+
+        document.execCommand("copy");
+
+        campo.remove();
+
+        mensagem.textContent =
+          "✅ Chave PIX copiada!";
 
       }
 
     }
 
-
-    /* Método alternativo de cópia */
-
-    function copiarAlternativo(chave) {
-
-      const campo =
-        document.getElementById("pixKey");
-
-      campo.select();
-
-      campo.setSelectionRange(
-        0,
-        99999
-      );
-
-      document.execCommand("copy");
-
-
-      document.getElementById(
-        "pixMensagem"
-      ).textContent =
-        "✅ Chave PIX copiada!";
-
-    }
-
   </script>
-
 
 </body>
 </html>
